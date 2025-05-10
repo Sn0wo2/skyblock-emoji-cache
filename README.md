@@ -1,2 +1,2 @@
 # skyblock-emoji-cache
-SkyHelper-Emoji cache api module
+[Skyblock-Item-Emojis](https://github.com/Altpapier/Skyblock-Item-Emojis) Cache API
