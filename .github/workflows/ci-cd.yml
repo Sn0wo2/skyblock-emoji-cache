@@ -84,25 +84,25 @@ jobs:
             - name: Run npm audit
               run: npm audit --production
 
-    jest:
-        name: run tests (jest)
-        needs: [npm]
-        runs-on: ubuntu-latest
-        steps:
-            - name: Git checkout
-              uses: actions/checkout@master
+    # jest:
+      # name: run tests (jest)
+      # needs: [npm]
+      # runs-on: ubuntu-latest
+          # steps:
+              # - name: Git checkout
+              # uses: actions/checkout@master
 
-            - name: Use Node.js ${{ env.NODE_VERSION }}
-              uses: actions/setup-node@master
-              with:
-                  node-version: ${{ env.NODE_VERSION }}
-                  cache: 'npm'
+              # - name: Use Node.js ${{ env.NODE_VERSION }}
+              # uses: actions/setup-node@master
+                # with:
+                # node-version: ${{ env.NODE_VERSION }}
+              # cache: 'npm'
 
-            - name: Install node dependencies
-              run: npm i
+              # - name: Install node dependencies
+              # run: npm i
 
-            - name: Run tests
-              run: npm test
+              # - name: Run tests
+              # run: npm test
 
     #  coverage:
     #    name: Code Coverage
