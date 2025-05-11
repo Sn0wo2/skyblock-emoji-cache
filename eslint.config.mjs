@@ -20,7 +20,6 @@ export default [
                 ...globals.node,
                 ...globals.browser,
                 ...globals.commonjs,
-                // ...globals.jest,
             },
 
             ecmaVersion: 'latest',
