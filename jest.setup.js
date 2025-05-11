@@ -1,3 +1,5 @@
+import {jest} from "globals";
+
 global.console = {
     ...console,
     // ? NOTE: uncomment to ignore specific console logs, currently ignoring only warnings
