@@ -21,6 +21,8 @@
     "author": "Sn0wo2",
     "license": "MIT",
     "dependencies": {
+        "@eslint/eslintrc": "^3.3.1",
+        "@eslint/js": "^9.26.0",
         "axios": "^1.9.0",
         "express": "^5.1.0",
         "globals": "^16.1.0",
