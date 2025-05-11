@@ -1,4 +1,4 @@
-import {jest} from "globals";
+import { jest } from 'globals';
 
 global.console = {
     ...console,
