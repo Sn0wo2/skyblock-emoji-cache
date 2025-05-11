@@ -4,7 +4,6 @@ import * as path from 'path';
 import express, { NextFunction, Request, Response } from 'express';
 import cron from 'node-cron';
 
-
 interface EmojiEntry {
     id?: string;
 }
@@ -44,14 +43,8 @@ async function fetchEmojis(): Promise<boolean> {
 
     try {
         const [emojiRes, itemRes] = await Promise.all([
-            axios.get<Emojis>(
-                'https://github.com/Altpapier/Skyblock-Item-Emojis/raw/refs/heads/main/v3/emojis.json',
-                settings
-            ),
-            axios.get<ItemHash>(
-                'https://github.com/Altpapier/Skyblock-Item-Emojis/raw/refs/heads/main/v3/itemHash.json',
-                settings
-            ),
+            axios.get<Emojis>('https://github.com/Altpapier/Skyblock-Item-Emojis/raw/refs/heads/main/v3/emojis.json', settings),
+            axios.get<ItemHash>('https://github.com/Altpapier/Skyblock-Item-Emojis/raw/refs/heads/main/v3/itemHash.json', settings),
         ]);
 
         console.log('✅ Successfully fetched emojis.json and itemHash.json');
@@ -72,7 +65,7 @@ async function fetchEmojis(): Promise<boolean> {
 
             const iName = itemName.replace(/:/g, '-');
 
-            if (EXTENSIONS.some(ext => existingFiles.has(`${iName}.${ext}`))) return;
+            if (EXTENSIONS.some((ext) => existingFiles.has(`${iName}.${ext}`))) return;
 
             const emojiId = emoji.normal.id ?? emoji.enchanted?.id;
             if (!emojiId) {
@@ -81,10 +74,7 @@ async function fetchEmojis(): Promise<boolean> {
             }
 
             try {
-                const resp = await axios.get<ArrayBuffer>(
-                    `https://cdn.discordapp.com/emojis/${emojiId}`,
-                    { ...settings, responseType: 'arraybuffer' }
-                );
+                const resp = await axios.get<ArrayBuffer>(`https://cdn.discordapp.com/emojis/${emojiId}`, { ...settings, responseType: 'arraybuffer' });
 
                 const contentType = resp.headers['content-type'];
                 const ext = CONTENT_TYPE_MAP[contentType];

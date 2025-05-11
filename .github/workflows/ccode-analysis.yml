@@ -1,0 +1,25 @@
+name: 'CodeQL'
+
+on:
+    schedule:
+        - cron: '30 1 * * *'
+
+jobs:
+    analyze:
+        name: Analyze
+        runs-on: ubuntu-latest
+
+        permissions:
+            security-events: write
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@master
+
+            - name: Initialize CodeQL
+              uses: github/codeql-action/init@master
+              with:
+                  languages: javascript
+
+            - name: Perform CodeQL Analysis
+              uses: github/codeql-action/analyze@master
