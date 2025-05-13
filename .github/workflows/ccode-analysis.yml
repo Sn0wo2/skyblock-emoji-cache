@@ -22,4 +22,4 @@ jobs:
                   languages: typescript
 
             - name: Perform CodeQL Analysis
-              uses: github/codeql-action/analyze@master
+              uses: github/codeql-action/analyze@main
