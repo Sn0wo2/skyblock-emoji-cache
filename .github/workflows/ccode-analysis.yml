@@ -1,25 +1,42 @@
-name: 'CodeQL'
+name: CodeQL
 
 on:
-    schedule:
-        - cron: '30 1 * * *'
+  schedule:
+    - cron: '30 1 * * *'
+
+permissions: {}
+
+concurrency:
+  group: codeql-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
-    analyze:
-        name: Analyze
-        runs-on: ubuntu-latest
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
 
-        permissions:
-            security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: actions
+            build-mode: none
+          - language: javascript-typescript
+            build-mode: none
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@master
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
-            - name: Initialize CodeQL
-              uses: github/codeql-action/init@main
-              with:
-                  languages: typescript
+      - uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
 
-            - name: Perform CodeQL Analysis
-              uses: github/codeql-action/analyze@main
+      - uses: github/codeql-action/analyze@v4
+        with:
+          category: /language:${{ matrix.language }}
