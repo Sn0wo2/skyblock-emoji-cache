@@ -77,7 +77,7 @@ async function fetchEmojis(): Promise<boolean> {
                 const resp = await axios.get<ArrayBuffer>(`https://cdn.discordapp.com/emojis/${emojiId}`, { ...settings, responseType: 'arraybuffer' });
 
                 const contentType = resp.headers['content-type'];
-                const ext = CONTENT_TYPE_MAP[contentType];
+                const ext = typeof contentType === 'string' ? CONTENT_TYPE_MAP[contentType] : undefined;
                 if (!ext) {
                     console.warn(`⚠️ Unknown content-type for ${itemName}: ${contentType}`);
                     return;
